@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.content.ContentValues
+import android.util.Log
 import android.widget.CheckBox
 
 class HomeFragment : Fragment() {
@@ -40,7 +41,9 @@ class HomeFragment : Fragment() {
         }
 
         //Setting date
-        val currentDate = MainActivity.currentDate
+        val currentDate = MainActivity.currentDate.split('-')
+
+
 
         //Elements
         val dateTV = view.findViewById<TextView>(R.id.dateTV)
@@ -59,7 +62,8 @@ class HomeFragment : Fragment() {
         val proudCB = view.findViewById<CheckBox>(R.id.proudCB)
 
 
-        dateTV.text = currentDate
+
+        dateTV.text = MainActivity.currentDate
         //Variables
         var currentRate = 3
         var stressed = 0
@@ -70,32 +74,62 @@ class HomeFragment : Fragment() {
         val note: String = notes.text?.toString() ?: ""
 
         //Checkbox checks, surely this could be done better
-        if(stressedCB.isChecked){ stressed = 1 }
-        else { stressed = 0 }
-
-        if(tiredCB.isChecked) { tired = 1 }
-        else { tired = 0 }
-
-        if(motivatedCB.isChecked) { motivated = 1 }
-        else { motivated = 0 }
-
-        if(proudCB.isChecked) { proud = 1 }
-        else { proud = 0 }
-
-        if(inspiredCB.isChecked) { inspired = 1 }
-        else { inspired = 0 }
+        val buttonList = listOf<Button>(rate1Btn, rate2Btn, rate3Btn, rate4Btn, rate5Btn)
+        val cbList = listOf<CheckBox>(stressedCB, tiredCB, motivatedCB, inspiredCB, proudCB)
 
         //Onclicks
-        rate1Btn.setOnClickListener { currentRate = 1 }
-        rate2Btn.setOnClickListener { currentRate = 2 }
-        rate3Btn.setOnClickListener { currentRate = 3 }
-        rate4Btn.setOnClickListener { currentRate = 4 }
-        rate5Btn.setOnClickListener { currentRate = 5 }
+        rate1Btn.setOnClickListener {
+            currentRate = 1
+            disableButton(buttonList, 0)
+        }
+        rate2Btn.setOnClickListener {
+            currentRate = 2
+            disableButton(buttonList, 1)
+        }
+        rate3Btn.setOnClickListener {
+            currentRate = 3
+            disableButton(buttonList, 2)
+        }
+        rate4Btn.setOnClickListener {
+            currentRate = 4
+            disableButton(buttonList, 3)
+        }
+        rate5Btn.setOnClickListener {
+            currentRate = 5
+            disableButton(buttonList, 4)
+        }
+
+        //reset stuff
+        for(button in buttonList){
+            button.isEnabled = true
+        }
+        for(cb in cbList){
+            cb.isChecked = false
+        }
+
 
         setBtn.setOnClickListener {
+            if(stressedCB.isChecked){ stressed = 1 }
+            else { stressed = 0 }
+
+            if(tiredCB.isChecked) { tired = 1 }
+            else { tired = 0 }
+
+            if(motivatedCB.isChecked) { motivated = 1 }
+            else { motivated = 0 }
+
+            if(proudCB.isChecked) { proud = 1 }
+            else { proud = 0 }
+
+            if(inspiredCB.isChecked) { inspired = 1 }
+            else { inspired = 0 }
+
+            Log.d("TestHome", "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}; stress:$stressed tired:$tired motivated:$motivated proud:$proud insp:$inspired; rate:$currentRate")
             //insert to database
             val values = ContentValues().apply {
-                put("date", currentDate)
+                put("day", currentDate[2])
+                put("month", currentDate[1])
+                put("year", currentDate[0])
                 put("rate", currentRate)
                 put("note", note)
                 put("stressed", stressed)
@@ -105,9 +139,11 @@ class HomeFragment : Fragment() {
                 put("inspired", inspired)
             }
 
-
-            val cursor = db.query("mood_calendar_data", null, "date = ?", arrayOf(currentDate), null, null, null)
+            val selection = "day = ? AND month = ? AND year = ?"
+            val selectionArgs = arrayOf("${currentDate[2]}", "${currentDate[1]}", "${currentDate[0]}")
+            val cursor = db.query("mood_calendar_data", null, selection, selectionArgs, null, null, null)
             val rowExists = cursor.moveToFirst()
+            Log.d("rowexists", "$rowExists")
             if(rowExists){
                 val idColumnIndex = cursor.getColumnIndex("id")
                 if(idColumnIndex >= 0){
@@ -118,10 +154,16 @@ class HomeFragment : Fragment() {
             else{
                 db.insert("mood_calendar_data", null, values)
             }
+            cursor.close()
         }
 
 
         return view
     }
-
+    fun disableButton(buttonList: List<Button>, indexOfDisable: Int){
+        for(button in buttonList){
+            button.isEnabled = true
+        }
+        buttonList[indexOfDisable].isEnabled = false
+    }
 }

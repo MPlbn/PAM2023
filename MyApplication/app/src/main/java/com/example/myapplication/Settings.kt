@@ -62,7 +62,7 @@ class Settings : Fragment() {
 
         dateBtn.setOnClickListener {
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener{view, mYear, mMonth, mDay ->
-                MainActivity.currentDate = "$mYear-$mMonth-$mDay"
+                MainActivity.currentDate = "$mYear-${mMonth+1}-$mDay"
                 dateTV.setText(MainActivity.currentDate)
             }, year, month, day)
 

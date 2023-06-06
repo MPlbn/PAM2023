@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#caf4fa"
+    tools:context=".StatsFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+          android:id="@+id/stats_dateTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="DATE MM-YYYY"
+          android:textSize="30dp"
+          android:textColor="#003840"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:textAlignment="center"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="100dp"
+          android:text="Średnia ocena dnia: X.XX"
+          android:textSize="30dp"
+          android:textColor="#003840"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/stats_dateTV"
+          android:id="@+id/stats_avgRateTV"
+          android:textAlignment="center"/>
+
+      <com.db.williamchart.view.BarChartView
+          android:id="@+id/stats_detailsChart"
+          android:layout_width="match_parent"
+          android:layout_height="250dp"
+          app:chart_spacing = "40dp"
+          app:chart_labelsSize = "17dp"
+          app:chart_barsColor = "#00BCD4"
+          app:chart_barsRadius = "15dp"
+          app:chart_axis = "x"
+          android:layout_marginHorizontal="20dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/stats_avgRateTV" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="Day rate curve"
+          android:textColor="#026B78"
+          android:textSize="20dp"
+          app:layout_constraintBottom_toTopOf="@+id/stats_rateChart"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/stats_detailsChart" />
+
+      <com.db.williamchart.view.LineChartView
+          android:id="@+id/stats_rateChart"
+          android:layout_width="match_parent"
+          android:layout_height="140dp"
+          android:padding="7dp"
+          android:layout_marginHorizontal="20dp"
+          app:chart_axis="x"
+          app:chart_lineColor="#00BCD4"
+          app:chart_lineThickness="3dp"
+          app:chart_smoothLine="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="@+id/stats_detailsChart"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="@+id/stats_detailsChart"
+          app:layout_constraintTop_toBottomOf="@+id/stats_detailsChart" />
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

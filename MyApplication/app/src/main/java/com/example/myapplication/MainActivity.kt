@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import java.time.LocalDate
+import java.util.Calendar
 
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
@@ -17,7 +18,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE IF NOT EXISTS mood_calendar_data (id INTEGER PRIMARY KEY," +
-                " date TEXT, rate INTEGER, stressed INTEGER, tired INTEGER, motivated INTEGER, proud INTEGER, inspired INTEGER, note TEXT)")
+                " day INTEGER, month INTEGER, year INTEGER, rate INTEGER, stressed INTEGER, tired INTEGER, motivated INTEGER, proud INTEGER, inspired INTEGER, note TEXT)")
         db?.execSQL("CREATE TABLE IF NOT EXISTS preference (id INTEGER PRIMARY KEY, calendarType INTEGER)")
     }
 
@@ -50,6 +51,16 @@ class MainActivity : AppCompatActivity() {
         settingsBtn.setOnClickListener{
             val SettingsFragment = Settings()
             supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, SettingsFragment).commit()
+        }
+
+        statsBtn.setOnClickListener {
+            val StatsFragment = StatsFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, StatsFragment).commit()
+        }
+
+        calendarBtn.setOnClickListener {
+            val CalendarFragment = CalendarFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, CalendarFragment).commit()
         }
 
         supportFragmentManager.beginTransaction().add(R.id.fragmentFrame, homeScreenFragment).commit()

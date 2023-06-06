@@ -22,7 +22,7 @@
         android:backgroundTint="#42c2ed"
         android:text="OPTIONS"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -32,11 +32,12 @@
         android:id="@+id/homebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+
         android:text="Home"
+        android:backgroundTint="#42c2ed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toEndOf="@+id/setbtn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentFrame"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -45,9 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cal"
+        android:backgroundTint="#42c2ed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toEndOf="@+id/homebtn"
         app:layout_constraintTop_toBottomOf="@+id/fragmentFrame"
         app:layout_constraintVertical_bias="0.0" />
@@ -57,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="stats"
+        android:backgroundTint="#42c2ed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

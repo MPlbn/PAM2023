@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:background="@color/white">
+    android:background="#017b8c">
 
     <TextView
         android:id="@+id/dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textColor="#fafafa"
         android:layout_marginTop="20dp"
         android:text="data" />
 
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="How do you feel today?"
+            android:textColor="#fafafa"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +100,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="350dp"
         android:layout_height="220dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="270dp"
         android:layout_gravity="center_horizontal">
         <View
             android:layout_width="match_parent"
@@ -117,6 +119,7 @@
             android:layout_marginTop="16dp"
             android:text="What are the details?"
             android:textAlignment="center"
+            android:textColor="#fafafa"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="stressed"
+            android:textColor="#fafafa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -136,6 +140,7 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="tired"
+            android:textColor="#fafafa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stressedCB" />
 
@@ -144,6 +149,7 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="motivated"
+            android:textColor="#fafafa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tiredCB" />
 
@@ -152,6 +158,7 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="proud"
+            android:textColor="#fafafa"
             app:layout_constraintStart_toEndOf="@+id/stressedCB"
             app:layout_constraintTop_toTopOf="@+id/stressedCB" />
 
@@ -160,27 +167,29 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="inspired"
+            android:textColor="#fafafa"
             app:layout_constraintStart_toEndOf="@+id/tiredCB"
             app:layout_constraintTop_toBottomOf="@+id/stressedCB" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="430dp">
 
         <EditText
             android:id="@+id/notes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/notepad_background"
             android:hint="Take your note here"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -188,6 +197,8 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="SET"
+        android:textColor="#03678c"
+        android:backgroundTint="#fafafa"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="540dp"/>
 </FrameLayout>
