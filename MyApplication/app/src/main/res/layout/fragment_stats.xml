@@ -67,7 +67,7 @@
           android:layout_height="140dp"
           android:padding="7dp"
           android:layout_marginHorizontal="20dp"
-          app:chart_axis="x"
+          app:chart_axis="none"
           app:chart_lineColor="#00BCD4"
           app:chart_lineThickness="3dp"
           app:chart_smoothLine="true"

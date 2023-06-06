@@ -62,6 +62,7 @@ class StatsFragment : Fragment() {
             cursor = db.rawQuery(createQuery(detailNames[i], calendarType, curMonth, curYear), null)
             if(cursor.moveToFirst()){
                 Log.d("WLAZLEM", ":D")
+                sum += cursor.getInt(0)
                 while(cursor.moveToNext()) {
                     sum += cursor.getInt(0)
                     Log.d("KURSOR", "${cursor.getInt(0)}")
@@ -93,13 +94,17 @@ class StatsFragment : Fragment() {
         if(!calendarType){
             cursor = db.rawQuery(getRateQuery(calendarType, curMonth, curYear), null)
             if(cursor.moveToFirst()){
-                var counter = 0
+                fullRate = cursor.getInt(0).toDouble()
+                var counter = 1
+                rateChartLabels.add("$counter" to cursor.getInt(0).toFloat())
                 while(cursor.moveToNext()){
                     fullRate += cursor.getInt(0).toDouble()
                     rateChartLabels.add("$counter" to cursor.getInt(0).toFloat())
                     counter++
                 }
+
                 fullRate /= counter
+
                 cursor.close()
             }
 
@@ -111,21 +116,21 @@ class StatsFragment : Fragment() {
             for(i in 1..12){
                 cursor = db.rawQuery(getRateQuery(false, i.toString(), curYear), null)
                 if(cursor.moveToFirst()){
-                    var counter = 0
-                    var monthRate: Double = 0.0
+                    var counter = 1
+                    var monthRate: Double = cursor.getInt(0).toDouble()
                     while(cursor.moveToNext()){
                         monthRate += cursor.getInt(0).toDouble()
                         counter++
                         Log.d("$i month", "$monthRate / counter: $counter")
-
                     }
-                    monthRate /= counter.toDouble()
+                    if(counter > 0){
+                        monthRate /= counter.toDouble()
+                    }
                     Log.d("month", "$i : $monthRate")
                     rateChartLabels.add(i.toString() to monthRate.toFloat())
 
                     fullRate += monthRate
                     fullCounter++
-
                 }
                 else{
                     rateChartLabels.add(i.toString() to 1.toFloat())
@@ -133,6 +138,7 @@ class StatsFragment : Fragment() {
 
             }
             fullRate /= fullCounter
+
             rateTV.text = "Average yearly rate: ${DecimalFormat("#.##").format(fullRate)}"
         }
 

@@ -43,8 +43,20 @@ class Settings : Fragment() {
 
         dateTV.setText(MainActivity.currentDate)
 
-        monthly.setOnClickListener { calType = 0 }
-        yearly.setOnClickListener { calType = 1 }
+        monthly.setOnClickListener {
+            calType = 0
+            monthly.isEnabled = false
+            monthly.alpha = 0.5f
+            yearly.isEnabled = true
+            yearly.alpha = 1f
+        }
+        yearly.setOnClickListener {
+            calType = 1
+            monthly.isEnabled = true
+            monthly.alpha = 1f
+            yearly.isEnabled = false
+            yearly.alpha = 0.5f
+        }
 
         set.setOnClickListener {
             val values = ContentValues().apply{
@@ -66,6 +78,8 @@ class Settings : Fragment() {
                 dateTV.setText(MainActivity.currentDate)
             }, year, month, day)
 
+
+
             dpd.show()
         }
 
@@ -74,6 +88,5 @@ class Settings : Fragment() {
 }
 
 private fun showDatePicker(){
-
 
 }

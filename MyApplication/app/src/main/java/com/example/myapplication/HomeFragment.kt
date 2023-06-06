@@ -14,6 +14,8 @@ import android.widget.CheckBox
 
 class HomeFragment : Fragment() {
 
+    private val cbList = mutableListOf<CheckBox>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -75,7 +77,7 @@ class HomeFragment : Fragment() {
 
         //Checkbox checks, surely this could be done better
         val buttonList = listOf<Button>(rate1Btn, rate2Btn, rate3Btn, rate4Btn, rate5Btn)
-        val cbList = listOf<CheckBox>(stressedCB, tiredCB, motivatedCB, inspiredCB, proudCB)
+        val cbList = mutableListOf<CheckBox>(stressedCB, tiredCB, motivatedCB, inspiredCB, proudCB)
 
         //Onclicks
         rate1Btn.setOnClickListener {
@@ -103,9 +105,7 @@ class HomeFragment : Fragment() {
         for(button in buttonList){
             button.isEnabled = true
         }
-        for(cb in cbList){
-            cb.isChecked = false
-        }
+
 
 
         setBtn.setOnClickListener {
@@ -155,15 +155,22 @@ class HomeFragment : Fragment() {
                 db.insert("mood_calendar_data", null, values)
             }
             cursor.close()
+            for(cb in cbList){
+                cb.isChecked = false
+            }
         }
 
 
         return view
     }
+
+
     fun disableButton(buttonList: List<Button>, indexOfDisable: Int){
         for(button in buttonList){
             button.isEnabled = true
+            button.alpha = 1f
         }
         buttonList[indexOfDisable].isEnabled = false
+        buttonList[indexOfDisable].alpha = 0.5f
     }
 }
